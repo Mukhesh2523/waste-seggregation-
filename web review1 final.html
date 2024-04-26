@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waste Segregation - Reduce, Reuse, Recycle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5; /* Light grey background */
+            color: #333;
+        }
+    
+        header, nav, main, footer {
+            padding: 10px;
+            background-color: #ffffff; /* White background */
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    
+        header h1, footer p {
+            color: #17a2b8; /* Turquoise - feedback color */
+        }
+    
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: space-around;
+            background-color: #e9ecef; /* Light grey background */
+            padding: 10px 0;
+            border-radius: 5px;
+        }
+    
+        nav ul li {
+            margin-right: 20px;
+        }
+    
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+    
+        nav ul li a:hover {
+            color: #007bff; /* Darker blue - hover color */
+        }
+    
+        main {
+            padding: 20px;
+        }
+    
+        section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #ffffff; /* White background */
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    
+        h2 {
+            color: #17a2b8; /* Turquoise - feedback color */
+        }
+    
+        .lesson img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    
+        .question {
+            margin-bottom: 15px;
+        }
+    
+        .answer label {
+            margin-left: 5px;
+        }
+    
+        .contact-form {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff; /* White background */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    
+        .contact-form label {
+            font-weight: bold;
+            color: #333; /* Dark grey - text color */
+        }
+    
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ced4da; /* Light grey border */
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    
+        .contact-form textarea {
+            resize: vertical;
+        }
+    
+        .contact-form input[type="submit"] {
+            background-color: #17a2b8; /* Turquoise - feedback color */
+            color: #ffffff; /* White text color */
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    
+        .contact-form input[type="submit"]:hover {
+            background-color: #138496; /* Darker turquoise - hover color */
+        }
+    
+        #introduction {
+            background-color: #ffffff; /* White background */
+        }
+    
+        #registration {
+            background-color: #ffffff; /* White background */
+        }
+    
+        #learning {
+            background-color: #ffffff; /* White background */
+        }
+    
+        #assessment {
+            background-color: #ffffff; /* White background */
+        }
+    
+        .highlight-heading {
+            background-color: #17a2b8; /* Turquoise - feedback color */
+            color: #ffffff; /* White text color */
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+    
+        header h1 {
+            background-color: #17a2b8; /* Turquoise - feedback color */
+            color: #ffffff; /* White text color */
+            padding: 10px;
+            border-radius: 5px;
+        }
+    
+        #signup {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #ffffff; /* White background */
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    
+        #signup h2 {
+            margin-bottom: 10px;
+            color: #17a2b8; /* Turquoise - feedback color */
+        }
+    
+        #signup form {
+            display: flex;
+            flex-direction: column;
+        }
+    
+        #signup input[type="text"],
+        #signup input[type="email"],
+        #signup input[type="password"] {
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ced4da; /* Light grey border */
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    
+        #signup input[type="submit"] {
+            background-color: #17a2b8; /* Turquoise - feedback color */
+            color: #ffffff; /* White text color */
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    
+        #signup input[type="submit"]:hover {
+            background-color: #138496; /* Darker turquoise - hover color */
+        }
+    
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 10px;
+        }
+    
+        .modal-content {
+            background-color: #ffffff; /* White background */
+            margin: 5% auto;
+            padding: 20px;
+            border: 2px solid #17a2b8; /* Turquoise - feedback color */
+            width: 80%;
+            border-radius: 5px;
+        }
+    
+        .close {
+            color: #333; /* Dark grey - text color */
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+    
+        .close:hover,
+        .close:focus {
+            color: #000; /* Black - hover color */
+            text-decoration: none;
+            cursor: pointer;
+        }
+    
+        #signupModal input[type="email"],
+        #signupModal input[type="text"] {
+            width: calc(60% - 5px);
+            display: inline-block;
+            margin-right: 10px;
+            border-radius: 8px;
+            border: 1px solid #ced4da; /* Light grey border */
+            padding: 10px;
+            box-sizing: border-box;
+        }
+    
+        #signupModal input[type="password"] {
+            width: calc(25% - 5px);
+            margin-right: 10px;
+            border-radius: 8px;
+            border: 1px solid #ced4da; /* Light grey border */
+            padding: 10px;
+            box-sizing: border-box;
+        }
+    
+        #signupButton {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #17a2b8; /* Turquoise - feedback color */
+            color: #ffffff; /* White text color */
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    
+        #signupButton:hover {
+            background-color: #138496; /* Darker turquoise - hover color */
+        }
+    </style>
+    
+</head>
+<body>
+    <header>
+        <h1>Empowering Sustainable Futures: Mastering Waste Segregation</h1>
+        <button id="signupButton" onclick="openModal()">Sign Up</button>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#introduction">Home</a></li>
+            <li><a href="#registration">Course Registration</a></li>
+            <li><a href="#learning">Interactive Course Learning</a></li>
+            <li><a href="#assessment">Assessment</a></li>
+            <li><a href="#feedback">Feedback & Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="introduction" style="display: block;">
+            <h2 class="vk">Reduce, Reuse, Recycle: A Powerful Trio for a Sustainable Future</h2>
+            <img src="C:\Users\THANU\Desktop\home image.jpg" alt="A descriptive alt text for the image">
+
+            <p>The concept of Reduce, Reuse, Recycle represents a hierarchy for sustainable waste management. It prioritizes minimizing waste generation in the first place (Reduce), followed by maximizing reuse (Reuse), and finally responsible recycling (Recycle). These principles are essential in combating environmental challenges and promoting a healthier planet for future generations.</p>
+    
+            <h3>Reduce: Minimizing Waste at the Source</h3>
+            <p>Think of reduction as the hero of waste management. It tackles the issue at its root, preventing unnecessary waste from entering the system in the first place. By reducing consumption, reevaluating purchasing habits, and embracing minimalism, individuals can significantly minimize their environmental impact. Planning meals, using reusable containers, and composting organic waste are effective strategies to reduce household waste and contribute to a more sustainable lifestyle.</p>
+            <ul>
+                <li style="text-align: center;">
+                    <span class="reduce-tip">Plan and Prioritize:</span> Make a grocery list, plan your meals for the week, and utilize leftovers creatively to avoid food waste.
+                    Planning and prioritizing are essential components of a sustainable lifestyle, particularly concerning waste reduction. By adopting strategic approaches, individuals can significantly minimize waste generation and contribute to a healthier environment. One effective strategy is to create a detailed plan encompassing various aspects of daily life, including shopping habits, meal preparation, and resource utilization. This plan should emphasize the importance of prioritizing essential items and avoiding unnecessary purchases, thereby reducing overall consumption.
+
+Meal planning plays a pivotal role in waste reduction efforts. By planning meals ahead and using ingredients efficiently, individuals can minimize food waste and save money. Creative utilization of leftovers is another valuable tactic, as it helps prevent discardable items and promotes resourcefulness. Additionally, considering packaging when making purchasing decisions is crucial. Opting for products with minimal, recyclable packaging or choosing refillable containers reduces plastic waste and supports sustainable packaging practices.
+
+Prioritizing the use of durable, long-lasting products over disposable alternatives is also key. This includes investing in quality items that have a longer lifespan and can be repaired or repurposed. By integrating these strategies into daily routines and decision-making processes, individuals can make a substantial impact on waste reduction and contribute positively to environmental conservation efforts.
+<br><br><img src="C:\Users\THANU\OneDrive\Documents\webprogramming project\grocery-list.jpg" alt="Grocery List with Checkmark" style="display: block; margin: 0 auto;"><br>
+
+                </li>
+                
+                <li style="text-align: center;">
+                    <span class="reduce-tip">Embrace Minimalism:</span> Consider packaging when buying products. Choose concentrated laundry detergents or products with minimal, recyclable packaging. Opt for refillable containers whenever possible.<br>
+                    Embracing planning as a core strategy in waste reduction and sustainability efforts involves meticulous foresight, organization, and thoughtful decision-making. Planning not only helps individuals streamline their daily activities but also contributes significantly to reducing waste generation and promoting resource efficiency.
+
+At the heart of embracing planning is the concept of proactive thinking. This entails envisioning potential waste sources and developing strategies to mitigate them before they arise. For instance, creating detailed shopping lists based on actual needs rather than impulse purchases can prevent excess food waste and unnecessary packaging. Moreover, planning meals in advance enables individuals to use ingredients efficiently, reducing food spoilage and disposal.
+
+Another critical aspect of planning is resource optimization. This includes identifying opportunities to reuse, repurpose, or recycle items instead of discarding them. Through careful planning, individuals can extend the lifespan of products, minimize the need for replacements, and ultimately reduce the volume of waste generated. For example, repairing or refurbishing items instead of buying new ones not only reduces waste but also conserves resources and reduces environmental impact.
+
+Furthermore, planning facilitates the adoption of sustainable practices in various aspects of life. This may involve choosing eco-friendly alternatives, such as reusable products, sustainable packaging, and energy-efficient appliances. By integrating these practices into daily routines and long-term plans, individuals can contribute significantly to environmental conservation and promote a more sustainable lifestyle.
+
+In essence, embracing planning empowers individuals to take proactive steps towards waste reduction, resource conservation, and environmental stewardship. It fosters a mindset of sustainability, encouraging mindful consumption, responsible decision-making, and the preservation of natural resources for future generations.
+                    <br><img src="C:\Users\THANU\OneDrive\Documents\webprogramming project\image2.jpg" alt="Concentrated detergent and refillable container" style="display: block; margin: 0 auto;"><br>
+                    
+                </li>
+                
+                <li style="text-align: center;">
+                    <span class="reduce-tip">Borrowing and Renting:</span> Need a power tool for a one-time project? Libraries often lend tools and equipment. Similarly, borrowing books and DVDs reduces resource utilization.
+                    Borrowing and renting are sustainable practices that contribute to reducing waste and conserving resources. Instead of buying items that you might only need occasionally, such as power tools or books, consider borrowing or renting them. This not only saves you money but also reduces the demand for new products, which in turn decreases the environmental impact associated with manufacturing and disposal.
+
+Libraries and community centers often offer lending services for tools, equipment, and even recreational items like sports gear or board games. You can also explore rental services for larger items like furniture or appliances, especially for short-term needs or special occasions.
+
+By embracing borrowing and renting, you participate in a circular economy where items are shared and utilized efficiently, extending their lifespan and reducing the overall consumption of resources. Additionally, it promotes community sharing and collaboration, fostering a sense of collective responsibility towards sustainability.
+
+Next time you need something temporarily, consider borrowing or renting instead of buying new. It's a simple yet impactful way to support waste reduction and contribute to a more sustainable future
+                    <br><br><img src="C:\Users\THANU\OneDrive\Documents\webprogramming project\img8.jpg" alt="Someone borrowing a tool from a library" style="display: block; margin: 0 auto;"><br>
+                    
+                </li>
+            </ul>
+    
+            <h3>Reuse: Giving Old Items New Life</h3>
+            <p>Before tossing something, consider its potential for a second life. Reusing items not only reduces waste but also promotes creativity and resourcefulness. By repurposing old items, individuals can reduce their ecological footprint and contribute to a more circular economy.</p>
+            <ul>
+                <li style="text-align: center;">
+                    <span class="reuse-tip">Ditch Disposables:</span> Invest in reusable shopping bags, water bottles, and food containers. This not only reduces waste but saves money in the long run.
+                    Ditching disposables is a powerful step towards sustainability. By investing in reusable shopping bags, water bottles, and food containers, you actively reduce waste and contribute to a healthier environment.
+
+Reusable shopping bags are sturdy alternatives to single-use plastic bags, helping to minimize plastic pollution in oceans and landfills. They are durable and can be used repeatedly, reducing the need for disposable bags with each shopping trip. Similarly, reusable water bottles eliminate the reliance on plastic bottles, which often end up in landfills or as litter. They also promote hydration while reducing the environmental impact of plastic waste.
+
+Food containers, especially those made of eco-friendly materials, are excellent for storing leftovers or packing meals on the go. They prevent the need for disposable containers and wraps, reducing plastic and paper waste significantly.
+
+Not only do these reusable items benefit the environment, but they also save you money in the long run. While the initial investment may seem higher than buying disposable alternatives, the cost per use decreases over time. You avoid continuously purchasing single-use items, leading to significant savings and a more sustainable lifestyle.
+
+By ditching disposables and opting for reusable alternatives, you make a positive impact on the planet and your wallet. It's a simple yet impactful change that aligns with sustainable living practices.
+                    <br><br><img src="C:\Users\THANU\OneDrive\Documents\webprogramming project\img3.jpg" alt="Reusable shopping bags, water bottles, and food containers" style="display: block; margin: 0 auto;"><br>
+                    
+                </li>
+                
+                <li style="text-align: center;">
+                    <span class="reuse-tip">Repurpose with Imagination:</span> Old jars and containers can become storage solutions, craft supplies, or even planters. Get creative and give old items a new purpose.
+                    Repurposing with imagination is a creative and eco-friendly way to breathe new life into old items. Those jars and containers that might otherwise end up in the trash can become versatile storage solutions, craft supplies, or even charming planters.
+
+Empty jars make excellent storage containers for small items like buttons, beads, spices, or office supplies. With a bit of labeling and organization, they can help declutter your space while adding a touch of vintage charm. Larger containers, such as plastic tubs or boxes, can be transformed into stylish organizers for shoes, toys, or crafting materials.
+
+When it comes to crafting, the possibilities are endless. Old jars can be painted, decorated, and repurposed into candle holders, vases, or even quirky terrariums. Plastic containers can be cut and shaped into molds for handmade soap or bath bombs. With a little creativity, you can turn seemingly ordinary items into unique and personalized creations.
+
+For plant lovers, repurposed containers offer a sustainable way to display greenery. Turn old teapots, tin cans, or wooden crates into charming planters for herbs, succulents, or small flowers. Not only does this add a decorative touch to your home or garden, but it also reduces waste by giving new life to discarded items.
+
+The key to repurposing is thinking outside the box and embracing your creativity. By finding new uses for old items, you reduce waste, save money, and add a personal touch to your surroundings. It's a win-win for both the environment and your inner artist.
+                    <br><br><img src="C:\Users\THANU\OneDrive\Documents\webprogramming project\img5.jpg" alt="Repurposed jars for storage and planters" style="display: block; margin: 0 auto;"><br>
+                    
+                </li>
+                
+                <li style="text-align: center;">
+                    <span class="reuse-tip">Mend, Don't Discard:</span> A tear in your favorite shirt doesn't have to mean the end. Learn basic sewing skills or take clothes to a tailor for repairs. Alternatively, donate gently used clothes.
+                    When faced with a tear or wear in your favorite clothing, don't rush to discard it. Instead, consider the sustainable approach of mending. Learning basic sewing skills can be empowering and cost-effective. With a few stitches, you can extend the life of your garments and reduce waste. For more complex repairs or alterations, a skilled tailor can work wonders, breathing new life into beloved pieces.
+
+By choosing to mend instead of discard, you contribute to a more sustainable fashion cycle. Repairing clothing not only saves money but also reduces the environmental impact of textile waste. Every stitch tells a story of care and commitment to mindful consumption.
+
+Another eco-conscious option is to donate gently used clothes. Items that no longer fit your style or size may be treasured by someone else. Donating extends the lifecycle of clothing, promoting reuse and reducing the demand for new production.
+
+Embracing the "mend, don't discard" mindset encourages a more thoughtful approach to fashion. It fosters a connection with our belongings, promotes resourcefulness, and minimizes our carbon footprint. Let's mend with intention, cherish our garments, and contribute positively to a more sustainable future.
+                    <br><br><img src="C:\Users\THANU\OneDrive\Documents\webprogramming project\img6.jpg" alt="Someone sewing a shirt" style="display: block; margin: 0 auto;"><br>
+                    
+                </li>
+
+                <li style="text-align: center;">
+                    <span class="recycle-tip">Recycle Responsibly:</span> Recycling is a vital component of sustainable living, serving as a proactive solution to environmental challenges and resource conservation. At its core, recycling involves the transformation of waste materials into new products, reducing the strain on natural resources and minimizing the environmental impact of waste disposal.
+
+                    One of the key benefits of recycling is the conservation of natural resources. By reusing materials such as paper, plastics, glass, and metals, recycling reduces the demand for raw materials extracted from the earth. For example, recycling paper helps preserve forests and reduces the need for logging activities, while recycling metals like aluminum and steel conserves energy and prevents the depletion of metal ores.
+                    
+                    Moreover, recycling plays a crucial role in energy conservation and greenhouse gas reduction. The process of recycling often requires less energy compared to producing goods from virgin materials. For instance, recycling aluminum saves up to 95% of the energy required to produce new aluminum from bauxite ore. Similarly, recycling plastics and glass significantly reduces energy consumption and greenhouse gas emissions associated with their production.
+                    
+                    In addition to environmental benefits, recycling contributes to economic growth and job creation. Recycling industries generate employment opportunities in waste collection, sorting, processing, and manufacturing of recycled products. These industries also stimulate innovation and investment in recycling technologies, leading to advancements in waste management and sustainable practices.
+                    
+                    Furthermore, recycling helps mitigate pollution by diverting waste from landfills and incineration facilities. Landfills emit greenhouse gases and leach harmful chemicals into the soil and water, posing risks to human health and ecosystems. By diverting waste to recycling facilities, we can reduce landfill volumes, minimize pollution, and promote a cleaner environment.
+                    
+                    Ultimately, embracing recycling requires a collective effort from individuals, businesses, and governments. Educating communities about recycling practices, improving waste management infrastructure, and promoting the use of recycled products are crucial steps toward a more sustainable future. By prioritizing recycling and adopting responsible consumption habits, we can protect the planet, conserve resources, and create a healthier environment for present and future generations.
+                    
+                    
+                    <br><img src="C:\Users\THANU\Desktop\recycle image.png" alt="Recycling Symbol">
+                </li>
+
+            </ul>
+        </section>
+    </main>
+    
+    
+        <section id="registration">
+            <h2>Course Registration</h2>
+            <form action="#" method="POST">
+                <label for="fullname">Full Name:</label><br>
+                <input type="text" id="fullname" name="fullname" required><br><br>
+
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" pattern="[a-zA-Z0-9._%+-]+@" title="Please enter a valid Gmail address" required><br><br>
+
+                <label for="phone">Phone:</label><br>
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" title="Please enter a 10-digit phone number" placeholder="Enter your phone number" required><br><br>
+
+
+                <label for="course">Course of Interest:</label><br>
+                <select id="course" name="course" required>
+                    <option value="" disabled selected>Select Course</option>
+                    <option value="Waste Segregation Basics">Waste Segregation Basics</option>
+                    <option value="Reduce, Reuse, Recycle Practices">Reduce, Reuse, Recycle Practices</option>
+                    <option value="Advanced Waste Management Techniques">Advanced Waste Management Techniques</option>
+                </select><br><br>
+
+                <label for="message">Message (Optional):</label><br>
+                <textarea id="message" name="message" rows="4" cols="50"></textarea><br><br>
+
+                <label for="paymentMethod">Payment Method:</label><br>
+                <select id="paymentMethod" name="paymentMethod">
+                    <option value="creditCard">Credit Card</option>
+                    <option value="UPI">UPI</option>
+                    <option value="bankTransfer">Bank Transfer</option>
+                    <option value="other">Other</option>
+                </select><br><br>
+
+                <label for="idProof">ID Proof:</label><br>
+                <input type="file" id="idProof" name="idProof" accept="image/*, application/pdf" required><br><br>
+
+                <input type="checkbox" id="termsCheckbox" name="termsCheckbox" required>
+                <label for="termsCheckbox">I agree to the <a href="terms_and_conditions.html" target="_blank">Terms and Conditions</a></label><br>
+
+                <input type="submit" value="Submit">
+            </form>
+        </section>
+
+        <script>
+            const form = document.getElementById('registrationForm');
+            form.addEventListener('submit', handleSubmit);
+        
+            function handleSubmit(event) {
+              event.preventDefault();
+        
+              const formData = new FormData(form);
+              const data = Object.fromEntries(formData.entries());
+        
+              // Simulate form submission
+              console.log('Form data:', data);
+            }
+          </script>
+
+        <section id="learning">
+            <h2>Interactive Course Learning</h2>
+            <div class="lesson">
+                <h2>Lesson 1: Introduction to Waste Segregation</h2>
+                <p>This lesson provides an overview of waste segregation and its importance in reducing environmental impact.</p>
+                <div class="video-container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/OasbYWF4_S8" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="lesson">
+                <h2>Lesson 2: Reuse Techniques</h2>
+                <p>This lesson covers various techniques for reusing waste materials effectively.</p>
+                <div class="video-container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/OasbYWF4_S8" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="lesson">
+                <h2>Lesson 3: Recycling Practices</h2>
+                <p>Learn about different recycling practices and their impact on waste management.</p>
+                <div class="video-container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/LxNumOifkT0" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- <section id="assessment">
+            <h2>Assessment</h2>
+            <form action="#" method="POST">
+                <div class="question">
+                    <h3>Question 1: What is the purpose of waste segregation?</h3>
+                    <div class="answer">
+                        <input type="radio" id="q1a1" name="q1" value="a1">
+                        <label for="q1a1">A. To mix different types of waste together</label>
+                    </div>
+                    <div class="answer">
+                        <input type="radio" id="q1a2" name="q1" value="a2">
+                        <label for="q1a2">B. To separate waste into categories for proper disposal and recycling</label>
+                    </div>
+                    <div class="answer">
+                        <input type="radio" id="q1a3" name="q1" value="a3">
+                        <label for="q1a3">C. To dispose of all waste in landfills</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>Question 2: What are the three Rs in waste management?</h3>
+                    <div class="answer">
+                        <input type="radio" id="q2a1" name="q2" value="a1">
+                        <label for="q2a1">A. Reduce, Recycle, Reseal</label>
+                    </div>
+                    <div class="answer">
+                        <input type="radio" id="q2a2" name="q2" value="a2">
+                        <label for="q2a2">B. Recycle, Reuse, Reduce</label>
+                    </div>
+                    <div class="answer">
+                        <input type="radio" id="q2a3" name="q2" value="a3">
+                        <label for="q2a3">C. Reuse, Recycle, Recover</label>
+                    </div>
+                </div>
+
+                
+                <div class="question">
+                    <h3>Question 3: What is the main goal of recycling?</h3>
+                    <div class="answer">
+                        <input type="radio" id="q3a1" name="q3" value="a1">
+                        <label for="q3a1">A. To create new waste products</label>
+                    </div>
+                    <div class="answer">
+                        <input type="radio" id="q3a2" name="q3" value="a2">
+                        <label for="q3a2">B. To reduce the amount of waste sent to landfills</label>
+                    </div>
+                    <div class="answer">
+                        <input type="radio" id="q3a3" name="q3" value="a3">
+                        <label for="q3a3">C. To increase pollution</label>
+                    </div>
+                </div>
+
+                
+                <div class="question">
+                    <h3>Question 4: Which materials are typically included in the category of recyclables?</h3>
+                    <div class="answer">
+                        <input type="radio" id="q4a1" name="q4" value="a1">
+                        <label for="q4a1">A. Plastic, glass, and metal</label>
+                    </div>
+                    <div class="answer">
+                        <input type="radio" id="q4a2" name="q4" value="a2">
+                        <label for="q4a2">B. Food waste and diapers</label>
+                    </div>
+                    <div class="answer">
+                        <input type="radio" id="q4a3" name="q4" value="a3">
+                        <label for="q4a3">C. Rocks and bricks</label>
+                    </div>
+                </div>
+
+                
+                <div class="question">
+                    <h3>Question 5: What is composting?</h3>
+                    <div class="answer">
+                        <input type="radio" id="q5a1" name="q5" value="a1">
+                        <label for="q5a1">A. Burning waste materials</label>
+                    </div>
+                    <div class="answer">
+                        <input type="radio" id="q5a2" name="q5" value="a2">
+                        <label for="q5a2">B. Turning organic waste into nutrient-rich soil</label>
+                    </div>
+                    <div class="answer">
+                        <input type="radio" id="q5a3" name="q5" value="a3">
+                        <label for="q5a3">C. Mixing all types of waste together</label>
+                    </div>
+                </div>
+
+                
+                <div class="question">
+                    <h3>Question 6: What are the benefits of reducing waste?</h3>
+                    <div class="answer">
+                        <input type="radio" id="q6a1" name="q6" value="a1">
+                        <label for="q6a1">A. Increased pollution</label>
+                    </div>
+                    <div class="answer">
+                        <input type="radio" id="q6a2" name="q6" value="a2">
+                        <label for="q6a2">B. Conservation of resources and reduced environmental impact</label>
+                    </div>
+                    <div class="answer">
+                        <input type="radio" id="q6a3" name="q6" value="a3">
+                        <label for="q6a3">C. More waste in landfills</label>
+                    </div>
+                </div>
+
+                
+                <div class="question">
+                    <h3>Question 7: What is e-waste?</h3>
+                    <div class="answer">
+                        <input type="radio" id="q7a1" name="q7" value="a1">
+                        <label for="q7a1">A. Food waste</label>
+                    </div>
+                    <div class="answer">
+                        <input type="radio" id="q7a2" name="q7" value="a2">
+                        <label for="q7a2">B. Waste generated from electronic devices</label>
+                    </div>
+                    <div class="answer">
+                        <input type="radio" id="q7a3" name="q7" value="a3">
+                        <label for="q7a3">C. Industrial waste</label>
+                    </div>
+                </div>
+
+                
+                <div class="question">
+                    <h3>Question 8: What is the concept of upcycling?</h3>
+                    <div class="answer">
+                        <input type="radio" id="q8a1" name="q8" value="a1">
+                        <label for="q8a1">A. Throwing away usable items</label>
+                    </div>
+                    <div class="answer">
+                        <input type="radio" id="q8a2" name="q8" value="a2">
+                        <label for="q8a2">B. Repurposing waste materials into new products of higher value</label>
+                    </div>
+                    <div class="answer">
+                        <input type="radio" id="q8a3" name="q8" value="a3">
+                        <label for="q8a3">C. Recycling plastic</label>
+                    </div>
+                </div>
+
+                
+                <div class="question">
+                    <h3>Question 9: What is hazardous waste?</h3>
+                    <div class="answer">
+                        <input type="radio" id="q9a1" name="q9" value="a1">
+                        <label for="q9a1">A. Waste that poses a risk to human health or the environment</label>
+                    </div>
+                    <div class="answer">
+                        <input type="radio" id="q9a2" name="q9" value="a2">
+                        <label for="q9a2">B. Waste from homes only</label>
+                    </div>
+                    <div class="answer">
+                        <input type="radio" id="q9a3" name="q9" value="a3">
+                        <label for="q9a3">C. Waste that can be easily recycled</label>
+                    </div>
+                </div>
+
+                
+                <div class="question">
+                    <h3>Question 10: What is the role of governments in waste management?</h3>
+                    <div class="answer">
+                        <input type="radio" id="q10a1" name="q10" value="a1">
+                        <label for="q10a1">A. Governments are not involved in waste management</label>
+                    </div>
+                    <div class="answer">
+                        <input type="radio" id="q10a2" name="q10" value="a2">
+                        <label for="q10a2">B. Enforcing regulations, implementing waste management policies, and promoting sustainable practices</label>
+                    </div>
+                    <div class="answer">
+                        <input type="radio" id="q10a3" name="q10" value="a3">
+                        <label for="q10a3">C. Selling waste materials</label>
+                    </div>
+                </div>
+
+                <input type="submit" value="Submit">
+            </form>
+         </section> -->
+
+        <section id="feedback">
+            <h2>Feedback & Contact Us</h2>
+            <div class="contact-form">
+                <form action="#" method="POST">
+                    <label for="fullname">Full Name:</label><br>
+                    <input type="text" id="fullname" name="fullname" required><br>
+
+                    <label for="email">Email:</label><br>
+                    <input type="email" id="email" name="email" required><br>
+
+                    <label for="message">Message:</label><br>
+                    <textarea id="message" name="message" rows="4" cols="30" required></textarea><br>
+
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Sign Up</h2>
+            <form action="#" method="POST" onsubmit="return validateForm()">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" required><br><br>
+    
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" required><br><br>
+    
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required><br><br>
+    
+                <label for="password">Password:</label>
+                <div class="password-field">
+                <input type="password" id="password" name="password" required>
+                <span class="toggle-password" onclick="togglePasswordVisibility('password')">&#x1f441;</span>
+                </div><br><br>
+
+                <label for="confirmPassword">Confirm Password:</label>
+                <div class="password-field">
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <span class="toggle-password" onclick="togglePasswordVisibility('confirmPassword')">&#x1f441;</span>
+                </div><br><br>
+    
+                <span id="passwordMatchError" style="color: red;"></span><br>
+    
+                <input type="submit" value="Sign Up">
+            </form>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2024 Waste Segregation Company</p>
+    </footer>
+    
+    <script>
+        const modal = document.getElementById('signupModal');
+    
+        const closeBtn = document.querySelector('.close');
+    
+        function openModal() {
+            modal.style.display = 'block';
+        }
+    
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+    
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    
+        function validateForm() {
+            var firstName = document.getElementById('firstName').value;
+            var lastName = document.getElementById('lastName').value;
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+            var passwordMatchError = document.getElementById('passwordMatchError');
+    
+            var isValid = true;
+    
+            if (firstName === '') {
+                passwordMatchError.innerText = 'First Name is required';
+                isValid = false;
+            }
+    
+            if (lastName === '') {
+                passwordMatchError.innerText = 'Last Name is required';
+                isValid = false;
+            }
+    
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                passwordMatchError.innerText = 'Enter a valid email address';
+                isValid = false;
+            }
+    
+            var passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+            if (!passwordPattern.test(password)) {
+                passwordMatchError.innerText = 'Password must be at least 8 characters long and contain at least one letter and one number';
+                isValid = false;
+            }
+    
+            if (password !== confirmPassword) {
+                passwordMatchError.innerText = 'Passwords do not match';
+                isValid = false;
+            }
+    
+            return isValid;
+        }
+    
+        function togglePasswordVisibility(inputId) {
+            var input = document.getElementById(inputId);
+            var icon = document.querySelector(`#${inputId} ~ .toggle-password`);
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.innerHTML = '&#x1f440;'; // Change eye icon to closed eye
+            } else {
+                input.type = 'password';
+                icon.innerHTML = '&#x1f441;'; // Change closed eye icon to eye
+            }
+        }
+    </script>
+    
+
+    <script>
+        
+        const sections = ['introduction', 'registration', 'learning', 'assessment', 'feedback'];
+
+    
+        function showSection(sectionId) {
+            sections.forEach(id => {
+                const section = document.getElementById(id);
+                if (section) {
+                    if (id === sectionId) {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault(); 
+                const sectionId = this.getAttribute('href').substring(1); 
+                showSection(sectionId); 
+            });
+        });
+
+        showSection('introduction');
+
+        
+    </script>
+</body>
+</html>
