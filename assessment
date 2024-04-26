@@ -1,0 +1,161 @@
+import React, { useState } from 'react';
+
+const AssessmentPage = () => {
+  const questions = [
+    {
+      id: 1,
+      question: 'What is waste segregation?',
+      options: [
+        'Throwing all waste in one bin',
+        'Separating waste into different categories',
+        'Ignoring waste management practices',
+        'Burning waste for disposal'
+      ],
+      correctAnswer: 'Separating waste into different categories'
+    },
+    {
+      id: 2,
+      question: 'Which of the following is an example of reducing waste?',
+      options: [
+        'Using single-use plastic bottles',
+        'Buying in bulk to reduce packaging',
+        'Throwing away electronics',
+        'Using disposable utensils'
+      ],
+      correctAnswer: 'Buying in bulk to reduce packaging'
+    },
+    {
+      id: 3,
+      question: 'What does "reuse" mean in waste management?',
+      options: [
+        'Throwing away items after one use',
+        'Repurposing items to extend their lifespan',
+        'Recycling all waste materials',
+        'Composting organic waste'
+      ],
+      correctAnswer: 'Repurposing items to extend their lifespan'
+    },
+    {
+      id: 4,
+      question: 'Which of the following is a benefit of recycling?',
+      options: [
+        'Increasing landfill space',
+        'Reducing pollution',
+        'Using more resources',
+        'Creating more waste'
+      ],
+      correctAnswer: 'Reducing pollution'
+    },
+    {
+      id: 5,
+      question: 'What can be composted in a compost bin?',
+      options: [
+        'Plastic bottles',
+        'Food scraps',
+        'Paper towels',
+        'Aluminum cans'
+      ],
+      correctAnswer: 'Food scraps'
+    },
+    {
+      id: 6,
+      question: 'Why is reducing waste important?',
+      options: [
+        'To use more resources',
+        'To save money',
+        'To conserve natural resources',
+        'To increase pollution'
+      ],
+      correctAnswer: 'To conserve natural resources'
+    },
+    {
+      id: 7,
+      question: 'What is the first step in the waste management hierarchy?',
+      options: [
+        'Reuse',
+        'Recycle',
+        'Reduce',
+        'Dispose'
+      ],
+      correctAnswer: 'Reduce'
+    },
+    {
+      id: 8,
+      question: 'Which type of waste is hazardous to the environment?',
+      options: [
+        'Organic waste',
+        'Plastic waste',
+        'Toxic waste',
+        'Glass waste'
+      ],
+      correctAnswer: 'Toxic waste'
+    },
+    {
+      id: 9,
+      question: 'What is the purpose of waste audits?',
+      options: [
+        'To increase waste production',
+        'To monitor waste management practices',
+        'To dispose of waste illegally',
+        'To encourage waste segregation'
+      ],
+      correctAnswer: 'To monitor waste management practices'
+    },
+    {
+      id: 10,
+      question: 'What can be donated or given away instead of being thrown away?',
+      options: [
+        'Broken electronics',
+        'Unused clothes',
+        'Expired food',
+        'Empty containers'
+      ],
+      correctAnswer: 'Unused clothes'
+    }
+  ];
+
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [score, setScore] = useState(0);
+  const [showScore, setShowScore] = useState(false);
+
+  const handleAnswerOptionClick = (selectedAnswer) => {
+    if (selectedAnswer === questions[currentQuestion].correctAnswer) {
+      setScore(score + 1);
+    }
+
+    const nextQuestion = currentQuestion + 1;
+    if (nextQuestion < questions.length) {
+      setCurrentQuestion(nextQuestion);
+    } else {
+      setShowScore(true);
+    }
+  };
+
+  return (
+    <div className="assessment-container">
+      {showScore ? (
+        <div className="score-section">
+          You scored {score} out of {questions.length}
+        </div>
+      ) : (
+        <>
+          <div className="question-section">
+            <div className="question-count">
+              <span>Question {currentQuestion + 1}</span>/{questions.length}
+            </div>
+            <div className="question-text">{questions[currentQuestion].question}</div>
+          </div>
+          <div className="answer-section">
+            {questions[currentQuestion].options.map((option, index) => (
+              <button key={index} onClick={() => handleAnswerOptionClick(option)}>
+                {option}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
+export default AssessmentPage;
